@@ -27,13 +27,15 @@ mainMenu = basalt.createFrame()
 
     regrasObj = mainMenu:addScrollableFrame()
         :hide()
+        --:setVisible(false)
         :setDirection("vertical")
         --:setScrollAmount(25)
         :setSize(24, 18)
         :setForeground(mainFg)
         :setPosition(2, 2)
 
-        regrasText = regrasObj:addLabel()
+        regrasText = regrasObj
+            :addLabel()
             :setPosition(3,3)
             :setText("        REGRAS        ",
                      "                      ",
@@ -61,6 +63,7 @@ mainMenu = basalt.createFrame()
                 :setPosition(1,1)
                 :setSize(5,1)
                 --.bntId == 3
+                :show()
 
 
 
@@ -146,6 +149,9 @@ mainMenu = basalt.createFrame()
         
         if self:getName() == "0" then
             regrasObj:show()
+            mainMenu:setPosition(1,27)
+            
+            
         end
         if self:getName() == "1" then
             basalt.debug(" 1 Pressed! ")
@@ -158,6 +164,8 @@ mainMenu = basalt.createFrame()
         end
         if self:getName() == "return" then
             regrasObj:hide()
+            mainMenu:setPosition(1,1)
+            
         end
     end
             

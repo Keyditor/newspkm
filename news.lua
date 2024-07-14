@@ -5,6 +5,7 @@
 salt = assert(require("salt.lua"))
 basalt = require("basalt.lua")
 
+
 -- Declarando variaveis vitais
 nodoType = "Cliente"
 nodoId = os.getComputerID()
@@ -23,6 +24,7 @@ mainMenu = basalt.createFrame()
     menuObt = mainMenu
         :addFrame()
         :setSize(24, 18)
+        :setForeground(colors.white)
         :setPosition(2, 2)
         
 
@@ -30,6 +32,7 @@ mainMenu = basalt.createFrame()
             :addLabel()
             :setPosition(1,1)
             :setText("DO SERVIDOR")
+            
             :show()
         subTittle = menuObt
             :addLabel()

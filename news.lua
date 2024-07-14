@@ -18,16 +18,57 @@ buttonHover = colors.lime
 mainFg = colors.lime
 
 -- Inicio do código
+mainMenu = basalt.createFrame()
+    :setTheme({FrameBG = colors.black, FrameFG = colors.lightGray})
+
+
+
+-- Tela de Regras
+
+    regrasObj = mainMenu:addScrollableFrame()
+        :hide()
+        :setDirection("vertical")
+        --:setScrollAmount(25)
+        :setSize(24, 18)
+        :setForeground(mainFg)
+        :setPosition(2, 2)
+
+        regrasText = regrasObj:addLabel()
+            :setPosition(3,3)
+            :setText("        REGRAS        ",
+                     "                      ",
+                     "Para postar no feed de",
+                     "noticias do servidor  ",
+                     "existem algumas regras",
+                     "                      ",
+                     "Regra 01: SEM FLOOD!  ",
+                     "Regra 02: SEM CHAT!   ",
+                     "Regra 03: SEM BIBLIAS!",
+                     "                      ",
+                     "Preencha os campos an-",
+                     "tes de publicar a not-",
+                     "icia para não haver   ",
+                     "duplicatas!           ",
+                     "                      ",
+                     "Outras coisas serão a-",
+                     "dicionadas com o tempo")         
+            :show()
+            bntReturn = regrasObj
+                :addButton("return")
+                :setText("<<<")
+                :setBackground(buttonBg)
+                :setForeground(mainFg)
+                :setPosition(1,1)
+                :setSize(5,1)
+                --.bntId == 3
+
+
+
 
 -- Tela de Menu
 
-mainMenu = basalt.createFrame()
-    :setTheme({FrameBG = colors.black, FrameFG = colors.lightGray})
-    
-
-
     -- Frame do Menu
-    menuObt = mainMenu:addScrollableFrame()
+    menuObj = mainMenu:addScrollableFrame()
         :setDirection("vertical")
         --:setScrollAmount(25)
         :setSize(24, 18)
@@ -35,22 +76,19 @@ mainMenu = basalt.createFrame()
         :setPosition(2, 2)
         
         -- Elementos do menu
-        Tittle = menuObt
+        Tittle = menuObj
             :addLabel()
             :setPosition(4,3)
             :setText("PORTAL DE NOTICIAS")
-            
             :show()
-        subTittle = menuObt
+        subTittle = menuObj
             :addLabel()
             :setPosition(7,4)
             :setText("DO  SERVIDOR")
             :show()
 
-
         
-        
-        bntRegras = menuObt
+        bntRegras = menuObj
             
             :addButton("0")
             :setText("REGRAS DO PORTAL")
@@ -61,7 +99,7 @@ mainMenu = basalt.createFrame()
             --.bntId == 0
             
 
-        bntFeed  = menuObt
+        bntFeed  = menuObj
             :addButton("1")
             :setText("FEED DE NOTICIAS")
             :setBackground(buttonBg)
@@ -70,7 +108,7 @@ mainMenu = basalt.createFrame()
             :setSize(18,3)
             --.bntId == 1
 
-        bntPost = menuObt
+        bntPost = menuObj
             
             :addButton("2")
             :setText("POSTAR NOTICIA")
@@ -81,7 +119,7 @@ mainMenu = basalt.createFrame()
             --.bntId == 2
             
 
-        bntExit = menuObt
+        bntExit = menuObj
             :addButton("3")
             :setText("SAIR")
             :setBackground(buttonBg)
@@ -107,7 +145,7 @@ mainMenu = basalt.createFrame()
         --basalt.debug()
         
         if self:getName() == "0" then
-            basalt.debug(" 0 Pressed! ")
+            regrasObj:show()
         end
         if self:getName() == "1" then
             basalt.debug(" 1 Pressed! ")
@@ -116,12 +154,15 @@ mainMenu = basalt.createFrame()
             basalt.debug(" 2 Pressed! ")
         end
         if self:getName() == "3" then
-            basalt.debug(" 3 Pressed! ")
+            os.shutdown()
+        end
+        if self:getName() == "return" then
+            regrasObj:hide()
         end
     end
             
     -- Configurações dos Elementos
-
+    --menu principal
     bntRegras:onClick(bntHover)
     bntRegras:onClickUp(bntLeave)
     bntFeed:onClick(bntHover)
@@ -130,6 +171,9 @@ mainMenu = basalt.createFrame()
     bntPost:onClickUp(bntLeave)
     bntExit:onClick(bntHover)
     bntExit:onClickUp(bntLeave)
+    --menu regras
+    bntReturn:onClick(bntHover)
+    bntReturn:onClickUp(bntLeave)
 
 -- Roda o programa
 basalt.autoUpdate()

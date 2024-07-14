@@ -2,8 +2,8 @@
 -- Aplicativo de comunicação e atualização
 
 -- Importando livrarias
-salt = assert(require("/salt"))
-basalt = require("/basalt")
+salt = assert(require("/salt.lua"))
+basalt = require("/basalt.lua")
 
 -- Declarando variaveis vitais
 nodoType = "Cliente"

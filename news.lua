@@ -13,7 +13,8 @@ nodoOwner = "Test Guy"
 
 -- Declarando variaveis de estilo
 
-buttonBg = colors.black
+buttonBg = colors.gray
+buttonHover = colors.lime
 mainFg = colors.lime
 
 -- Inicio do código
@@ -26,9 +27,8 @@ mainMenu = basalt.createFrame()
 
 
     -- Frame do Menu
-    menuObt = mainMenu
-        :addFrame()
-        --:setScrollable()
+    menuObt = mainMenu:addScrollableFrame()
+        :setDirection("vertical")
         --:setScrollAmount(25)
         :setSize(24, 18)
         :setForeground(mainFg)
@@ -50,11 +50,12 @@ mainMenu = basalt.createFrame()
 
         
         
-        bntRegras = menuObt
+            bntRegras = menuObt
             
             :addButton()
             :setText("REGRAS DO PORTAL")
             :setBackground(buttonBg)
+            :setForeground(mainFg)
             :setPosition(4,8)
             :setSize(18,3)
             
@@ -63,33 +64,49 @@ mainMenu = basalt.createFrame()
             :addButton()
             :setText("FEED DE NOTICIAS")
             :setBackground(buttonBg)
+            :setForeground(mainFg)
             :setPosition(4,12)
             :setSize(18,3)
+
+        bntPost = menuObt
             
+            :addButton()
+            :setText("POSTAR NOTICIA")
+            :setBackground(buttonBg)
+            :setForeground(mainFg)
+            :setPosition(4,16)
+            :setSize(18,3)
+            
+
+        bntExit = menuObt
+            :addButton()
+            :setText("EXIT")
+            :setBackground(buttonBg)
+            :setForeground(mainFg)
+            :setPosition(4,20)
+            :setSize(18,3)
+
         
-        -- Funções do menu
-        function bntHover(nBnt)
-            if nBnt == 0 then
-                bntRegras:setBackground(mainFg)
-                bntRegras:setForeground(buttonBg)
-            end
-            if nBnt == 1 then
-                bntFeed:setBackground(mainFg)
-                bntFeed:setForeground(buttonBg)
-            end
-            if nBnt == nil then
-                bntRegras:setBackground(buttonBg)
-                bntRegras:setForeground(mainFg)
-                bntFeed:setBackground(buttonBg)
-                bntFeed:setForeground(mainFg)
-            end
-        end
+    -- Funções do menu
+    function buttonOnScroll(self, direction, x, y)
+        basalt.debug("Someone scrolls on me!")
+    end
+    function bntHover(self)
+        self:setForeground(colors.black)
+        self:setBackground(buttonHover)
+    end
+    function bntLeave(self)
+        self:setForeground(mainFg)
+        self:setBackground(buttonBg)
+    end
             
-        -- Configurações dos Elementos
-        bntRegras:onHover(bntHover(0))
-        bntFeed:onHover(bntHover(1))
-        bntRegras:onLeave(bntHover(nil))
-        bntFeed:onLeave(bntHover(nil))
+    -- Configurações dos Elementos
+
+    
+    bntRegras:onClick(bntHover)
+    bntFeed:onClick(bntHover)
+    bntRegras:onClickUp(bntLeave)
+    bntFeed:onClickUp(bntLeave)
 
 -- Roda o programa
 basalt.autoUpdate()

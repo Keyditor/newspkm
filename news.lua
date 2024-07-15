@@ -67,166 +67,138 @@ end
 
 -- Tela de Regras
 
-    sub[2]:addScrollableFrame()
+rulePage = sub[2]:addScrollableFrame()
+    :show()
+    --:setVisible(false)
+    :setDirection("vertical")
+    --:setScrollAmount(25)
+    :setSize(24, 18)
+    :setForeground(mainFg)
+    :setPosition(2, 2)
+    
+
+    regrasText = rulePage
+        :addLabel()
+        :setSize("parent.w","parent.h")
+        :setPosition(3,3)
+        :setText("        REGRAS        ".."Para postar no feed de".."noticias do servidor ".."existem algumas regras".."                      ".."Regra 01: SEM FLOOD!  ".."Regra 02: SEM CHAT!   ".."Regra 03: SEM BIBLIAS!".."                      ".."Preencha os campos ant".."es de publicar a notic".."ia para nao haver dupl".."icatas!               ".."                      ".."Outras coisas serao a-".."dicionadas com o tempo..")         
         :show()
-        --:setVisible(false)
-        :setDirection("vertical")
-        --:setScrollAmount(25)
-        :setSize(24, 18)
-        :setForeground(mainFg)
-        :setPosition(2, 2)
-        regrasObj = sub[2]
-        
-        regrasText = regrasObj
-            :addLabel()
-            :setPosition(3,3)
-            :setText("        REGRAS        ",
-                     "                      ",
-                     "Para postar no feed de",
-                     "noticias do servidor  ",
-                     "existem algumas regras",
-                     "                      ",
-                     "Regra 01: SEM FLOOD!  ",
-                     "Regra 02: SEM CHAT!   ",
-                     "Regra 03: SEM BIBLIAS!",
-                     "                      ",
-                     "Preencha os campos an-",
-                     "tes de publicar a not-",
-                     "icia para não haver   ",
-                     "duplicatas!           ",
-                     "                      ",
-                     "Outras coisas serão a-",
-                     "dicionadas com o tempo")         
-            :show()
-            bntReturn = regrasObj
-                :addButton("return")
-                :setText("<<<")
-                :setBackground(buttonBg)
-                :setForeground(mainFg)
-                :setPosition(1,1)
-                :setSize(5,1)
-                --.bntId == 3
-                :show()
-        :hide()
-
-
 
 
 -- Tela de Menu
 
-    -- Frame do Menu
-    menuObj = sub[1]:addScrollableFrame("mainMenu")
-        :setDirection("vertical")
-        --:setScrollAmount(25)
-        :setSize(24, 18)
+-- Frame do Menu
+menuObj = sub[1]:addScrollableFrame("mainMenu")
+    :setDirection("vertical")
+    --:setScrollAmount(25)
+    :setSize(24, 18)
+    :setForeground(mainFg)
+    :setPosition(2, 2)
+        
+    -- Elementos do menu
+    Tittle = menuObj
+        :addLabel()
+        :setPosition(3,3)
+        :setText("PORTAL DE NOTICIAS")
+        :show()
+    subTittle = menuObj
+        :addLabel()
+        :setPosition(6,4)
+        :setText("DO  SERVIDOR")
+        :show()
+
+        
+    bntRegras = menuObj
+            
+        :addButton("0")
+        :setText("REGRAS DO PORTAL")
+        :setBackground(buttonBg)
         :setForeground(mainFg)
-        :setPosition(2, 2)
-        
-        -- Elementos do menu
-        Tittle = menuObj
-            :addLabel()
-            :setPosition(4,3)
-            :setText("PORTAL DE NOTICIAS")
-            :show()
-        subTittle = menuObj
-            :addLabel()
-            :setPosition(7,4)
-            :setText("DO  SERVIDOR")
-            :show()
-
-        
-        bntRegras = menuObj
-            
-            :addButton("0")
-            :setText("REGRAS DO PORTAL")
-            :setBackground(buttonBg)
-            :setForeground(mainFg)
-            :setPosition(4,8)
-            :setSize(18,3)
-            --.bntId == 0
+        :setPosition(3,8)
+        :setSize(18,3)
+        --.bntId == 0
             
 
-        bntFeed  = menuObj
-            :addButton("1")
-            :setText("FEED DE NOTICIAS")
-            :setBackground(buttonBg)
-            :setForeground(mainFg)
-            :setPosition(4,12)
-            :setSize(18,3)
-            --.bntId == 1
+    bntFeed  = menuObj
+        :addButton("1")
+        :setText("FEED DE NOTICIAS")
+        :setBackground(buttonBg)
+        :setForeground(mainFg)
+        :setPosition(3,12)
+        :setSize(18,3)
+        --.bntId == 1
 
-        bntPost = menuObj
+    bntPost = menuObj
             
-            :addButton("2")
-            :setText("POSTAR NOTICIA")
-            :setBackground(buttonBg)
-            :setForeground(mainFg)
-            :setPosition(4,16)
-            :setSize(18,3)
-            --.bntId == 2
+        :addButton("2")
+        :setText("POSTAR NOTICIA")
+        :setBackground(buttonBg)
+        :setForeground(mainFg)
+        :setPosition(3,16)
+        :setSize(18,3)
+        --.bntId == 2
             
 
-        bntExit = menuObj
-            :addButton("3")
-            :setText("SAIR")
-            :setBackground(buttonBg)
-            :setForeground(mainFg)
-            :setPosition(4,20)
-            :setSize(18,3)
-            --.bntId == 3
+    bntExit = menuObj
+        :addButton("3")
+        :setText("SAIR")
+        :setBackground(buttonBg)
+        :setForeground(mainFg)
+        :setPosition(3,20)
+        :setSize(18,3)
+        --.bntId == 3
 
         
     -- Funções do menu
 
-    function buttonOnScroll(self, direction, x, y)
-        basalt.debug("Someone scrolls on me!")
-    end
-    function bntHover(self)
-        self:setForeground(colors.black)
-        self:setBackground(buttonHover)
-        basalt.debug("Opa")
-    end
-    function bntLeave(self)
-        self:setForeground(mainFg)
-        self:setBackground(buttonBg)
-        --basalt.debug()
+function buttonOnScroll(self, direction, x, y)
+    basalt.debug("Someone scrolls on me!")
+end
+function bntHover(self)
+    self:setForeground(colors.black)
+    self:setBackground(buttonHover)
+    basalt.debug("Opa")
+end
+function bntLeave(self)
+    self:setForeground(mainFg)
+    self:setBackground(buttonBg)
+    --basalt.debug()
         
-        if self:getName() == "0" then
-            basalt.setActiveFrame(rulePage)
-            mainMenu:setPosition(1,27)
-            basalt.debug(basalt.getActiveFrame():getName())
+    if self:getName() == "0" then
+        basalt.setActiveFrame(rulePage)
+        mainMenu:setPosition(1,27)
+        basalt.debug(basalt.getActiveFrame():getName())
             
-            
-        end
-        if self:getName() == "1" then
-            basalt.debug(" 1 Pressed! ")
-        end
-        if self:getName() == "2" then
-            basalt.debug(" 2 Pressed! ")
-        end
-        if self:getName() == "3" then
-            os.shutdown()
-        end
-        if self:getName() == "return" then
-            regrasObj:hide()
-            mainMenu:setPosition(1,1)
-            
-        end
     end
+    if self:getName() == "1" then
+        basalt.debug(" 1 Pressed! ")
+    end
+    if self:getName() == "2" then
+        basalt.debug(" 2 Pressed! ")
+    end
+    if self:getName() == "3" then
+        os.shutdown()
+    end
+    if self:getName() == "return" then
+        regrasObj:hide()
+        mainMenu:setPosition(1,1)
             
-    -- Configurações dos Elementos
+    end
+end
+            
+-- Configurações dos Elementos
     --menu principal
-    bntRegras:onClick(bntHover)
-    bntRegras:onClickUp(bntLeave)
-    bntFeed:onClick(bntHover)
-    bntFeed:onClickUp(bntLeave)
-    bntPost:onClick(bntHover)
-    bntPost:onClickUp(bntLeave)
-    bntExit:onClick(bntHover)
-    bntExit:onClickUp(bntLeave)
+bntRegras:onClick(bntHover)
+bntRegras:onClickUp(bntLeave)
+bntFeed:onClick(bntHover)
+bntFeed:onClickUp(bntLeave)
+bntPost:onClick(bntHover)
+bntPost:onClickUp(bntLeave)
+bntExit:onClick(bntHover)
+bntExit:onClickUp(bntLeave)
     --menu regras
-    bntReturn:onClick(bntHover)
-    bntReturn:onClickUp(bntLeave)
+--bntReturn:onClick(bntHover)
+--bntReturn:onClickUp(bntLeave)
     
 basalt.debug(basalt.getActiveFrame():getName())
 

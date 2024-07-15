@@ -1,33 +1,50 @@
-local basalt = require("basalt")
+local basalt = require("basalt") -- we need basalt here
 
-local main = basalt.createFrame():setTheme({FrameBG = colors.black, FrameFG = colors.lightGray})
+local main = basalt.createFrame():setTheme({FrameBG = colors.lightGray, FrameFG = colors.black})
 
--- Vertical scrolling is pretty simple, as you can tell:
-local sub1 = main:addFrame():setScrollable():setSize(20, 15):setPosition(2, 2)
-
-sub1:addLabel():setPosition(3, 2):setText("Scrollable")
-sub1:addLabel():setPosition(3, 12):setText("Inside")
-sub1:addLabel():setPosition(3, 20):setText("Outside")
-
--- Here we create a custom scroll event as you can see we dont add a :setScrollable() method to our frame, instead we add a custom scroll event
-local objects = {}
-
-local sub2 = main:addFrame():setPosition(23, 2):setSize(25, 5):onScroll(function(self, event, dir)
-    local maxScroll = 0
-    for k,v in pairs(objects)do -- here we iterate trough every object and get their x position + width this way we can find out what's the maximum allowed value to scroll
-        local x = v:getX()
-        local w = v:getWidth()
-        maxScroll = x + w > maxScroll and x + w or maxScroll -- if you don't understand this line, http://lua-users.org/wiki/TernaryOperator
-    end
-    local xOffset = self:getOffset()
-    if(xOffset+dir>=0 and xOffset+dir<=maxScroll-self:getWidth())then
-        self:setOffset(xOffset+dir, 0)
-    end
+--[[ 
+Here we create the sidebar, on focus it should change the position to parent.w - (self.w-1) which "opens the frame"
+when the focus gets lost we simply change the position to "parent.w"
+As you can see we add :setZIndex(25) - this makes sure the sidebar frame is always more important than our normal sub frames.
+:setScrollable just makes the sidebar frame scrollable (in case you're adding more frames)
+]]
+local sidebar = main:addScrollableFrame():setBackground(colors.gray):setPosition("parent.w", 1):setSize(15, "parent.h"):setZIndex(25)
+:onGetFocus(function(self)
+    self:setPosition("parent.w - (self.w-1)")
+end)
+:onLoseFocus(function(self)
+    self:setPosition("parent.w")
 end)
 
--- Because we need to iterate the objects, we add them into a table.
-table.insert(objects, sub2:addButton():setPosition(2, 2):setText("Scrollable"))
-table.insert(objects, sub2:addButton():setPosition(16, 2):setText("Inside"))
-table.insert(objects, sub2:addButton():setPosition(30, 2):setText("Outside"))
+-- Once again we add 3 frames, the first one should be immediatly visible
+local sub = {
+    main:addFrame():setPosition(1, 1):setSize("parent.w", "parent.h"),
+    main:addFrame():setPosition(1, 1):setSize("parent.w", "parent.h"):hide(),
+    main:addFrame():setPosition(1, 1):setSize("parent.w", "parent.h"):hide(),
+}
+
+--This part of the code adds buttons based on the sub table.
+local y = 2
+for k,v in pairs(sub)do
+    sidebar:addButton():setText("Example "..k) -- creating the button and adding a name k is just the index
+    :setBackground(colors.black)
+    :setForeground(colors.lightGray)
+    :setSize("parent.w - 2", 3)
+    :setPosition(2, y)
+    :onClick(function() -- here we create a on click event which hides ALL sub frames and then shows the one which is linked to the button
+        for a, b in pairs(sub)do
+            b:hide()
+            v:show()
+        end
+    end)
+    y = y + 4
+end
+
+sub[1]:addButton():setPosition(2, 2)
+
+sub[2]:addLabel():setText("Hello World!"):setPosition(2, 2)
+
+sub[3]:addLabel():setText("Now we're on example 3!"):setPosition(2, 2)
+sub[3]:addButton():setText("No functionality"):setPosition(2, 4):setSize(18, 3)
 
 basalt.autoUpdate()

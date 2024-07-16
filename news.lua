@@ -76,14 +76,14 @@ rulePage = sub[2]:addScrollableFrame()
     :setSize(24, 18)
     :setForeground(mainFg)
     :setPosition(2, 2)
-    
+
 
     regrasText = rulePage
         :addLabel()
         :setSize("parent.w","parent.h")
         :setPosition(3,3)
-        :setTextAlign("center")
-        :setText("        REGRAS        Para postar no feed de noticias do servidor existem algumas regras                      Regra 01: SEM FLOOD!  Regra 02: SEM CHAT!   Regra 03: SEM BIBLIAS!                      Preencha os campos antes de publicar a noticia para nao haver duplicatas!                                     Outras coisas serao adicionadas com o tempo..")         
+        --:setTextAlign("center")
+        :setText("        REGRAS        Para postar no feed de noticias do servidor existem algumas regras                      Regra 01: SEM FLOOD!  Regra 02: SEM CHAT!   Regra 03: SEM BIBLIAS!                      Preencha os campos antes de publicar a noticia para nao haver duplicatas!                                     Outras coisas serao adicionadas com o tempo..")
         :show()
 
 
@@ -96,7 +96,7 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
     :setSize(24, 18)
     :setForeground(mainFg)
     :setPosition(2, 2)
-        
+
     -- Elementos do menu
     Tittle = menuObj
         :addLabel()
@@ -109,9 +109,9 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         :setText("DO  SERVIDOR")
         :show()
 
-        
+
     bntRegras = menuObj
-            
+
         :addButton("0")
         :setText("REGRAS DO PORTAL")
         :setBackground(buttonBg)
@@ -119,7 +119,7 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         :setPosition(3,8)
         :setSize(18,3)
         --.bntId == 0
-            
+
 
     bntFeed  = menuObj
         :addButton("1")
@@ -131,7 +131,7 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         --.bntId == 1
 
     bntPost = menuObj
-            
+
         :addButton("2")
         :setText("POSTAR NOTICIA")
         :setBackground(buttonBg)
@@ -139,7 +139,7 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         :setPosition(3,16)
         :setSize(18,3)
         --.bntId == 2
-            
+
 
     bntExit = menuObj
         :addButton("3")
@@ -150,7 +150,7 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         :setSize(18,3)
         --.bntId == 3
 
-        
+
     -- Funções do menu
 
 function buttonOnScroll(self, direction, x, y)
@@ -165,12 +165,12 @@ function bntLeave(self)
     self:setForeground(mainFg)
     self:setBackground(buttonBg)
     --basalt.debug()
-        
+
     if self:getName() == "0" then
         basalt.setActiveFrame(rulePage)
         mainMenu:setPosition(1,27)
         basalt.debug(basalt.getActiveFrame():getName())
-            
+
     end
     if self:getName() == "1" then
         basalt.debug(" 1 Pressed! ")
@@ -184,10 +184,10 @@ function bntLeave(self)
     if self:getName() == "return" then
         regrasObj:hide()
         mainMenu:setPosition(1,1)
-            
+
     end
 end
-            
+
 -- Configurações dos Elementos
     --menu principal
 bntRegras:onClick(bntHover)
@@ -201,7 +201,7 @@ bntExit:onClickUp(bntLeave)
     --menu regras
 --bntReturn:onClick(bntHover)
 --bntReturn:onClickUp(bntLeave)
-    
+
 basalt.debug(basalt.getActiveFrame():getName())
 
 

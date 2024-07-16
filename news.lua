@@ -76,20 +76,50 @@ rulePage = sub[2]:addScrollableFrame()
     :setSize(24, 18)
     :setForeground(mainFg)
     :setPosition(2, 2)
-
+    
 
     regrasText = rulePage
         :addLabel()
-        :setSize("parent.w","parent.h")
-        :setPosition(3,3)
+        :setSize("parent.w - 3","parent.h")
+        :setPosition(2,2)
         --:setTextAlign("center")
-        :setText("        REGRAS        Para postar no feed de noticias do servidor existem algumas regras                      Regra 01: SEM FLOOD!  Regra 02: SEM CHAT!   Regra 03: SEM BIBLIAS!                      Preencha os campos antes de publicar a noticia para nao haver duplicatas!                                     Outras coisas serao adicionadas com o tempo..")
+        :setText("       REGRAS                           Para postar no feed de noticias do servidor existem algumas regras                              Regra 01: SEM FLOOD! Regra 02: SEM CHAT! Regra 03: SEM BIBLIAS!             Regra 04: SEM ACENTO PARA NAO BUGAR!                         Preencha os campos antes de publicar a noticia para nao haver duplicatas!                                     Outras coisas serao adicionadas com o tempo..")
         :show()
 
 
--- Tela de Menu
+-- Tela de sair
+exitScreen = sub[4]:addScrollableFrame()
+    :show()
+    :setSize(24, 18)
+    :setForeground(mainFg)
+    :setPosition(2, 2)
+    
+    exitText = exitScreen
+        :addLabel()
+        :setText("Deseja mesmo sair?")
+        :setPosition("parent.w / 2 - 8","parent.h / 2 - 3")
+        :show()
+    exitYes = exitScreen
+        :addButton("exitYes")
+        :setText("SIM")
+        :setBackground(buttonBg)
+        :setForeground(mainFg)
+        :setPosition("(parent.w / 2) - 5","parent.h / 2 + 1")
+        :setSize(5,3)
+        :show()
+    exitNo = exitScreen
+        :addButton("exitNo")
+        :setText("NAO")
+        :setBackground(buttonBg)
+        :setForeground(mainFg)
+        :setPosition("(parent.w / 2) + 2","parent.h / 2 + 1")
+        :setSize(5,3)
+        :show()
 
--- Frame do Menu
+
+-- Tela Principal
+
+-- Frame de noticias
 menuObj = sub[1]:addScrollableFrame("mainMenu")
     :setDirection("vertical")
     --:setScrollAmount(25)
@@ -109,48 +139,6 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         :setText("DO  SERVIDOR")
         :show()
 
-
-    bntRegras = menuObj
-
-        :addButton("0")
-        :setText("REGRAS DO PORTAL")
-        :setBackground(buttonBg)
-        :setForeground(mainFg)
-        :setPosition(3,8)
-        :setSize(18,3)
-        --.bntId == 0
-
-
-    bntFeed  = menuObj
-        :addButton("1")
-        :setText("FEED DE NOTICIAS")
-        :setBackground(buttonBg)
-        :setForeground(mainFg)
-        :setPosition(3,12)
-        :setSize(18,3)
-        --.bntId == 1
-
-    bntPost = menuObj
-
-        :addButton("2")
-        :setText("POSTAR NOTICIA")
-        :setBackground(buttonBg)
-        :setForeground(mainFg)
-        :setPosition(3,16)
-        :setSize(18,3)
-        --.bntId == 2
-
-
-    bntExit = menuObj
-        :addButton("3")
-        :setText("SAIR")
-        :setBackground(buttonBg)
-        :setForeground(mainFg)
-        :setPosition(3,20)
-        :setSize(18,3)
-        --.bntId == 3
-
-
     -- Funções do menu
 
 function buttonOnScroll(self, direction, x, y)
@@ -166,38 +154,26 @@ function bntLeave(self)
     self:setBackground(buttonBg)
     --basalt.debug()
 
-    if self:getName() == "0" then
-        basalt.setActiveFrame(rulePage)
-        mainMenu:setPosition(1,27)
-        basalt.debug(basalt.getActiveFrame():getName())
-
-    end
-    if self:getName() == "1" then
-        basalt.debug(" 1 Pressed! ")
-    end
-    if self:getName() == "2" then
-        basalt.debug(" 2 Pressed! ")
-    end
-    if self:getName() == "3" then
+    if self:getName() == "exitYes" then
         os.shutdown()
     end
-    if self:getName() == "return" then
-        regrasObj:hide()
-        mainMenu:setPosition(1,1)
+    if self:getName() == "exitNo" then
+        sub[4]:hide()
+        sub[1]:show()
 
     end
 end
 
 -- Configurações dos Elementos
     --menu principal
-bntRegras:onClick(bntHover)
-bntRegras:onClickUp(bntLeave)
-bntFeed:onClick(bntHover)
-bntFeed:onClickUp(bntLeave)
-bntPost:onClick(bntHover)
-bntPost:onClickUp(bntLeave)
-bntExit:onClick(bntHover)
-bntExit:onClickUp(bntLeave)
+exitYes:onClick(bntHover)
+exitYes:onClickUp(bntLeave)
+exitNo:onClick(bntHover)
+exitNo:onClickUp(bntLeave)
+--bntPost:onClick(bntHover)
+--bntPost:onClickUp(bntLeave)
+--bntExit:onClick(bntHover)
+--bntExit:onClickUp(bntLeave)
     --menu regras
 --bntReturn:onClick(bntHover)
 --bntReturn:onClickUp(bntLeave)

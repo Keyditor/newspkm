@@ -4,6 +4,7 @@
 -- Importando livrarias
 salt = assert(require("salt"))
 basalt = require("basalt")
+models = require("models")
 
 
 -- Declarando variaveis vitais
@@ -81,7 +82,8 @@ rulePage = sub[2]:addScrollableFrame()
         :addLabel()
         :setSize("parent.w","parent.h")
         :setPosition(3,3)
-        :setText("        REGRAS        ".."Para postar no feed de".."noticias do servidor ".."existem algumas regras".."                      ".."Regra 01: SEM FLOOD!  ".."Regra 02: SEM CHAT!   ".."Regra 03: SEM BIBLIAS!".."                      ".."Preencha os campos ant".."es de publicar a notic".."ia para nao haver dupl".."icatas!               ".."                      ".."Outras coisas serao a-".."dicionadas com o tempo..")         
+        :setTextAlign("center")
+        :setText("        REGRAS        Para postar no feed de noticias do servidor existem algumas regras                      Regra 01: SEM FLOOD!  Regra 02: SEM CHAT!   Regra 03: SEM BIBLIAS!                      Preencha os campos antes de publicar a noticia para nao haver duplicatas!                                     Outras coisas serao adicionadas com o tempo..")         
         :show()
 
 

@@ -119,9 +119,14 @@ exitScreen = sub[4]:addScrollableFrame()
 -- Tela de Publicar
 
 postScreen = sub[3]:addScrollableFrame("Post")
+    :show()
     :setSize(24,22)
+    :setForeground(colors.lime)
+    :setBackground(colors.black)
     :setPosition(1,1)
     qLabel = postScreen:addLabel()
+        :show()
+        :setSize("parent.w","parent.h")
         :setText("No que voce esta pensando hoje?")
         :setPosition(2,2)
 

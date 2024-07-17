@@ -116,6 +116,15 @@ exitScreen = sub[4]:addScrollableFrame()
         :setSize(5,3)
         :show()
 
+-- Tela de Publicar
+
+postScreen = sub[3]:addScrollableFrame("Post")
+    :setSize(24,22)
+    :setPosition(1,1)
+    qLabel = postScreen:addLabel()
+        :setText("No que voce esta pensando hoje?")
+        :setPosition(2,2)
+
 
 -- Tela Principal
 
@@ -150,7 +159,7 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
         :setForeground(colors.lime)
         :setBackground(colors.black)
         
-        refreshBnt = newsFrame:addButton("refresh")
+        refreshBnt = menuObj:addButton("refresh")
             :setSize(10,3)
             :setText("§ Reload")
             :setPosition(8,22)

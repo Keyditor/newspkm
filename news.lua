@@ -145,10 +145,15 @@ menuObj = sub[1]:addScrollableFrame("mainMenu")
     newsFrame = menuObj
         :addScrollableFrame("news")
         :setDirection("vertical")
-        :setSize(24,18)
+        :setSize(22,18)
         :setPosition(2,6)
         :setForeground(colors.lime)
         :setBackground(colors.black)
+        
+        refreshBnt = newsFrame:addButton("refresh")
+            :setSize(10,3)
+            :setText("§ Reload")
+            :setPosition(8,22)
 
 -- Funções do menu
 

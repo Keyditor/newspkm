@@ -47,7 +47,7 @@ for k,v in pairs(sub)do
         name = "Regras"
     end
     if k == 3 then
-        name = "Noticias"
+        name = "Publicar"
     end
     if k == 4 then
         name = "Sair"
@@ -119,27 +119,38 @@ exitScreen = sub[4]:addScrollableFrame()
 
 -- Tela Principal
 
--- Frame de noticias
 menuObj = sub[1]:addScrollableFrame("mainMenu")
     :setDirection("vertical")
     --:setScrollAmount(25)
-    :setSize(24, 18)
-    :setForeground(mainFg)
-    :setPosition(2, 2)
+    :setSize(26, 24)
+    :setForeground(colors.black)
+    :setBackground(colors.lime)
+    :setPosition(1, 1)
 
-    -- Elementos do menu
+    -- Elementos da tela principal
+
     Tittle = menuObj
         :addLabel()
-        :setPosition(3,3)
+        :setPosition(4,3)
         :setText("PORTAL DE NOTICIAS")
         :show()
     subTittle = menuObj
         :addLabel()
-        :setPosition(6,4)
+        :setPosition(7,4)
         :setText("DO  SERVIDOR")
         :show()
 
-    -- Funções do menu
+    -- Frame de noticias
+
+    newsFrame = menuObj
+        :addScrollableFrame("news")
+        :setDirection("vertical")
+        :setSize(24,18)
+        :setPosition(2,6)
+        :setForeground(colors.lime)
+        :setBackground(colors.black)
+
+-- Funções do menu
 
 function buttonOnScroll(self, direction, x, y)
     basalt.debug("Someone scrolls on me!")

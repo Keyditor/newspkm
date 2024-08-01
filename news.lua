@@ -129,6 +129,11 @@ postScreen = sub[3]:addScrollableFrame("Post")
         :setSize("parent.w","parent.h")
         :setText("No que voce esta pensando hoje?")
         :setPosition(2,2)
+    postText = postScreen:addTextfield()
+            :show()
+            :setSize(22,12)
+            :setPosition(1,5)
+
 
 
 -- Tela Principal
